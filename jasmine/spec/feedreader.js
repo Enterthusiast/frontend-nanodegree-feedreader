@@ -30,7 +30,7 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-        it('have a URL', function() {
+        it('all feeds have a defined and not empty URL variable', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
                 expect(feed.url).not.toEqual("");
@@ -41,7 +41,7 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-        it('have a name', function() {
+        it('all feeds have a defined and not empty name variable', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
                 expect(feed.name).not.toEqual("");
@@ -97,15 +97,15 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         var oldFeed, newFeed;
-        beforeAll(function(done) {
-            //loading a feed
-            loadFeed(0, done);
-        });
         beforeEach(function(done) {
-            // storing the previously loaded feed
-            oldFeed = $('.entry');
-            // loading a new feed
-            loadFeed(1, done);
+            // loading a first feed
+            loadFeed(0, function() {
+                oldFeed = $('.entry');
+                loadFeed(1, function() {
+                    newFeed = $('.entry');
+                    done();
+                });
+            });
         });
         it('content change after a new feed has been selected', function(done) {
             // storing the newly loaded feed
