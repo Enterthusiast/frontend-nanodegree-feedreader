@@ -98,14 +98,19 @@ $(function() {
          */
         var oldFeed, newFeed;
         beforeAll(function(done) {
+            //loading a feed
             loadFeed(0, done);
         });
         beforeEach(function(done) {
+            // storing the previously loaded feed
             oldFeed = $('.entry');
+            // loading a new feed
             loadFeed(1, done);
         });
         it('content change after a new feed has been selected', function(done) {
+            // storing the newly loaded feed
             newFeed = $('.entry');
+            // comparing the first entry content of each feed
             expect(oldFeed[0].innerText).not.toEqual(newFeed[0].innerText);
             done();
         });
