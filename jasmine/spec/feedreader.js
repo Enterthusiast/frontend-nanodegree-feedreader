@@ -97,6 +97,9 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         var oldFeed, newFeed;
+        beforeAll(function(done) {
+            loadFeed(0, done);
+        });
         beforeEach(function(done) {
             oldFeed = $('.entry');
             loadFeed(1, done);
